@@ -1,0 +1,19 @@
+version: "2.3"
+
+services:
+  web:
+    build: "web"
+    ports:
+      - "8080:80"
+    volumes_from:
+      - "fpm:ro"
+  fpm:
+    build: "app"
+    env_file: ".env"
+    volumes:
+      - "www:/var/www/html"
+      - "data:/var/www/html/data"
+
+volumes:
+  www:
+  data:
