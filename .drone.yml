@@ -1,0 +1,40 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: tags
+  image: docker.int.zowi.ee/docker-buildenv
+  commands:
+    - git-restore-mtime
+    - generate-drone-tags
+
+- name: build web
+  image: docker.int.zowi.ee/drone/docker
+  settings:
+    repo: docker.int.zowi.ee/nextcloud/web
+    context: web
+    dockerfile: web/Dockerfile
+  environment:
+    DOCKER_REGISTRY: https://docker.int.zowi.ee
+    DOCKER_USERNAME:
+      from_secret: nexus_user
+    DOCKER_PASSWORD:
+      from_secret: nexus_password
+
+- name: build app
+  image: docker.int.zowi.ee/drone/docker
+  settings:
+    repo: docker.int.zowi.ee/nextcloud/app
+    context: app
+    dockerfile: app/Dockerfile
+  environment:
+    DOCKER_REGISTRY: https://docker.int.zowi.ee
+    DOCKER_USERNAME:
+      from_secret: nexus_user
+    DOCKER_PASSWORD:
+      from_secret: nexus_password
+
+image_pull_secrets:
+  - docker_config_json
