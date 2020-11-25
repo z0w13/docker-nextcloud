@@ -6,7 +6,7 @@
     root * /var/www/html
     file_server
 
-    php_fastcgi ${PHP_URI} {
+    php_fastcgi {env.PHP_URI} {
         env PATH /bin
         env modHeadersAvailable true
         env front_controller_active true
