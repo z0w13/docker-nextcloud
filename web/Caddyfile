@@ -4,7 +4,7 @@
 
   root /var/www/html
 
-  fastcgi / fpm:9000 php {
+  fastcgi / srv+tcp://nextcloud-app-app.service.consul php {
     env PATH /bin
     env modHeadersAvailable true
     env front_controller_active true
