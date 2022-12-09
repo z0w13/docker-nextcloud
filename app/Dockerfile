@@ -1,5 +1,5 @@
 FROM nextcloud:18.0.9-fpm-alpine
-#RUN rm -vf /usr/local/etc/php-fpm.d/*.conf
+
 COPY www.conf /usr/local/etc/php-fpm.d/zzz-override.conf
 COPY user.config.php /usr/src/nextcloud/config/user.config.php
 
