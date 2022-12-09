@@ -16,8 +16,8 @@ services:
     init: true
     restart: always
     volumes:
-      - "www:/var/www/html"
-      - "data:/var/www/html/data"
+      - "./volumes/www:/var/www/html"
+      - "./volumes/data:/var/www/html/data"
   database:
     image: postgres:15.1
     restart: unless-stopped
@@ -25,15 +25,10 @@ services:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
     env_file: "env"
     volumes:
-      - database:/var/lib/postgresql/data
+      - ./volumes/database:/var/lib/postgresql/data
   mailhog:
     image: mailhog/mailhog:v1.0.1
     restart: unless-stopped
     ports:
       - "1025:1025"
       - "8025:8025"
-
-volumes:
-  www:
-  data:
-  database:
