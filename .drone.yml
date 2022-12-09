@@ -11,7 +11,7 @@ steps:
     - generate-drone-tags
 
 - name: build web
-  image: docker.int.zowi.ee/drone/docker
+  image: plugins/docker
   settings:
     repo: docker.int.zowi.ee/nextcloud/web
     context: web
@@ -24,7 +24,7 @@ steps:
       from_secret: nexus_password
 
 - name: build app
-  image: docker.int.zowi.ee/drone/docker
+  image: plugins/docker
   settings:
     repo: docker.int.zowi.ee/nextcloud/app
     context: app
