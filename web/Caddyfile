@@ -35,14 +35,14 @@
 
     @forbidden {
         path /.htaccess
-        path /data
-        path /config
-        path /db_structure
+        path /data/*
+        path /config/*
+        path /db_structure/*
         path /.xml
         path /README
-        path /3rdparty
-        path /lib
-        path /templates
+        path /3rdparty/*
+        path /lib/*
+        path /templates/*
         path /occ
         path /console.php
     }
